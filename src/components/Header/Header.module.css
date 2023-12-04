@@ -1,0 +1,9 @@
+.header {
+  height: 100px;
+  background: url(../../assets/images/header.jpg) center;
+  display: flex;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 15px;
+}
