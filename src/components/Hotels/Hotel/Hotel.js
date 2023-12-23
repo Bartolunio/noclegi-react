@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Hotel.module.css";
 import hotelImg from "../../../assets/images/hotel1.jpg";
 
-function Hotel() {
+function Hotel(props) {
   return (
     <div className={`card ${style.Hotel}`}>
       <div className="card-body">
@@ -17,11 +17,11 @@ function Hotel() {
           <div className="col-8">
             <div className="row">
               <div className="col">
-                <p className={style.title}>Pensjonat</p>
-                <span>Warszawa</span>
+                <p className={style.title}>{props.name}</p>
+                <span>{props.city}</span>
               </div>
               <div className="col text-end">
-                <h5>Ocena: 7.2</h5>
+                <h5>Ocena: {props.rating}</h5>
                 <a href="#section" className="btn btn-primary px-5 mt-2">
                   Pokaż
                 </a>
@@ -29,11 +29,7 @@ function Hotel() {
             </div>
           </div>
           <div className="col-12">
-            <p className={style.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s.
-            </p>
+            <p className={style.description}>{props.description}</p>
           </div>
         </div>
       </div>
