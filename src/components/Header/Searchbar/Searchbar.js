@@ -5,12 +5,11 @@ function Searchbar(props) {
 
   const search = () => {
     props.onSearch(term);
-    // console.log("szukaj", term);
   };
   const onkeydownHandler = (e) => {
     if (e.key === "Enter") {
       search();
-    }
+    }   
   };
 
   return (
