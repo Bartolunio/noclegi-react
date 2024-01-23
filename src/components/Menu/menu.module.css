@@ -2,15 +2,17 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  text-align: left;
+  text-align: center;
+  background-color: rgb(212, 209, 209);
+  border-radius: 10px;
 }
-
 .menuItem {
   display: inline-block;
-  text-align: left;
+  margin-right: 15px;
 }
-
+.menuItem a {
+  color: #6c757d;
+}
 .menuContainer {
-  border: 1px solid darkgoldenrod;
   margin: 10px 0;
 }
