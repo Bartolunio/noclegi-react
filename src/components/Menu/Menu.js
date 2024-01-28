@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import style from "./Menu.module.css";
+import style from "./menu.module.css";
 import AuthContext from "../../context/authContext";
 
 function Menu() {
@@ -9,17 +9,17 @@ function Menu() {
     <div className={`${style.menuContainer}`}>
       <ul className={style.menu}>
         <li className={style.menuItem}>
-          <a href="#">Home</a>
+          <a href="/#">Home</a>
         </li>
         {auth.isAuthenticated ? (
           <li className={style.menuItem}>
-            <a href="#" onClick={auth.logout}>
+            <a href="/#" onClick={auth.logout}>
               Wyloguj
             </a>
           </li>
         ) : (
           <li className={style.menuItem}>
-            <a href="#" onClick={auth.login}>
+            <a href="/#" onClick={auth.login}>
               Zaloguj
             </a>
           </li>
