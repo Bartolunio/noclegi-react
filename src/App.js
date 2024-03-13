@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useReducer } from "react";
+import { HashRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
@@ -10,69 +10,40 @@ import ThemeButton from "./components/UI/ThemeButton/ThemeButton";
 import ThemeContext from "./context/themeContext";
 import AuthContext from "./context/authContext";
 import ReducerContext from "./context/reducerContext";
-import InsportingQuote from "./components/InspiringQuote/InspiringQuote";
-import { reducer, initialState } from "./reducer";
+import InsporingQuote from "./components/InspiringQuote/InspiringQuote";
+import { reducer, intialState } from "./reducer";
 import Home from "./pages/Home/Home";
-
-const backendHotels = [
-  {
-    id: 1,
-    name: "Pod akacjami",
-    city: "Warszawa",
-    rating: 8.3,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.",
-    image: "",
-  },
-  {
-    id: 2,
-    name: "Dębowy",
-    city: "Lublin",
-    rating: 8.8,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat id lorem vitae accumsan.",
-    image: "",
-  },
-];
+import Hotel from "./pages/Hotel/Hotel";
+import Search from "./pages/Search/Search";
+import Profile from "./pages/Profile/Profile";
+import NotFound from "./pages/404/404";
+import Login from "./pages/Auth/Login";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const searchHandler = (term) => {
-    const newHotels = [...backendHotels].filter((x) =>
-      x.name.toLowerCase().includes(term.toLowerCase())
-    );
-    dispatch({ type: "set-hotels", hotels: newHotels });
-  };
+  const [state, dispatch] = useReducer(reducer, intialState);
 
   const header = (
     <Header>
-      <InsportingQuote />
-      <Searchbar onSearch={(term) => searchHandler(term)} />
+      <InsporingQuote />
+      <Searchbar />
       <ThemeButton />
     </Header>
   );
   const content = (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Home />
-            </>
-          }
-        />
-        <Route
-          path="/hotel/:id"
-          element={
-            <>
-              <h1>To jest jakiś hotel!</h1>
-            </>
-          }
-        />
-      </Routes>
-    </>
+    <div>
+      <Switch>
+        <Route path="/hotele/:id">
+          <Hotel />
+        </Route>
+        <Route path="/wyszukaj/:term?" component={Search} />
+        <Route path="/profil">
+          {state.isAuthenticated} <Profile/>: <Redirect to="/zaloguj"/>
+        </Route>
+        <Route path="/zaloguj" component={Login} />
+        <Route path="/" exact component={Home} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
   );
   const menu = <Menu />;
   const footer = <Footer />;
@@ -83,7 +54,6 @@ function App() {
         value={{
           isAuthenticated: state.isAuthenticated,
           login: () => dispatch({ type: "login" }),
-
           logout: () => dispatch({ type: "logout" }),
         }}
       >

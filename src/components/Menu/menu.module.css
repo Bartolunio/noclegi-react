@@ -2,9 +2,7 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  text-align: center;
-  background-color: rgb(212, 209, 209);
-  border-radius: 10px;
+  text-align: left;
 }
 .menuItem {
   display: inline-block;
@@ -13,6 +11,10 @@
 .menuItem a {
   color: #6c757d;
 }
+.menuItemActive {
+  text-decoration: underline;
+}
 .menuContainer {
+  border: 1px solid #cdcdcd;
   margin: 10px 0;
 }

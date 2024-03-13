@@ -1,27 +1,22 @@
-import React, { useContext } from "react";
-import ThemeContext from "../../../context/themeContext";
+import { useContext } from 'react';
+import ThemeContext from '../../../context/themeContext';
 
 const buttonStyles = {
-  color: "black",
+  color: '#fff',
   border: 0,
-  backgroundColor: "transparent",
-};
+  backgroundColor: 'transparent'
+}
 
 export default function ThemeButton(props) {
   const theme = useContext(ThemeContext);
 
   return (
-    <button style={buttonStyles} onClick={theme.changeTheme}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        className="bi bi-droplet-fill"
-        viewBox="0 0 16 16"
-      >
-        <path d="M8 16a6 6 0 0 0 6-6c0-1.655-1.122-2.904-2.432-4.362C10.254 4.176 8.75 2.503 8 0c0 0-6 5.686-6 10a6 6 0 0 0 6 6M6.646 4.646l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448c.82-1.641 1.717-2.753 2.093-3.13" />
-      </svg>
+    <button 
+      style={buttonStyles}
+      onClick={theme.changeTheme}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bucket-fill" viewBox="0 0 16 16">
+          <path d="M2.522 5H2a.5.5 0 0 0-.494.574l1.372 9.149A1.5 1.5 0 0 0 4.36 16h7.278a1.5 1.5 0 0 0 1.483-1.277l1.373-9.149A.5.5 0 0 0 14 5h-.522A5.5 5.5 0 0 0 2.522 5zm1.005 0a4.5 4.5 0 0 1 8.945 0H3.527z"/>
+        </svg>
     </button>
   );
 }

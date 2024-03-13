@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 
 const quotes = [
   "Odkryj nieznane i poznaj siebie na nowo podczas podróży.",
@@ -13,28 +13,32 @@ const quotes = [
   "Życie to podróż, a każdy nowy dzień to nowa przygoda.",
 ];
 
-const style = {
+const styles = {
   position: "absolute",
   padding: "10px",
   top: "10px",
   left: 0,
   right: 0,
-  color: "blue",
   textAlign: "center",
+  color: "#fff",
+  fontSize: "0.9rem",
   fontStyle: "italic",
 };
-function InsportingQuote() {
-  const [quote, setQuote] = useState("");
+
+function InsporingQuote(props) {
+  const [quote, setQuote] = useState("Wczytywanie cytatu...");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ... pobieranie
     setLoading(false);
   }, []);
+
   useLayoutEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }, [loading]);
 
-  return <p style={style}>{quote}</p>;
+  return <p style={styles}>{quote}</p>;
 }
 
-export default InsportingQuote;
+export default InsporingQuote;

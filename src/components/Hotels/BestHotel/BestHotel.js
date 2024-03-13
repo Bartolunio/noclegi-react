@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import moment from 'moment';
 
 const BestHotel = (props) => {
   const [time, setTime] = useState('');
+  
   const hotel = props.getHotel();
   const endTime = moment().add(23, 'minutes').add(34, 'seconds');
   let interval = null;
   
+
+  // componentDidMount()
   useEffect(() => {
     interval = setInterval(() => {
       const leftTime = -moment().diff(endTime) / 1000;
@@ -15,6 +18,7 @@ const BestHotel = (props) => {
       setTime(`minut: ${minutes}, sekund: ${seconds}`);
     }, 1000);
 
+    // componentWillUnmount()
     return () => {
       clearInterval(interval);
     }
@@ -31,7 +35,7 @@ const BestHotel = (props) => {
           <p>Ocena: {hotel.rating}</p>
         </div>
         <p>Do końca oferty pozostało: {time}</p>
-        <a href="/#" className="btn btn-sm btn-light">
+        <a href="#" className="btn btn-sm btn-light">
           Pokaż
         </a>
       </div>

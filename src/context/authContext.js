@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const AuthContext = React.createContext({
   isAuthenticated: false,
@@ -6,6 +6,6 @@ const AuthContext = React.createContext({
   logout: () => {},
 });
 
-AuthContext.displayName = "AuthContext";
+AuthContext.displayName = 'AuthContext';
 
 export default AuthContext;

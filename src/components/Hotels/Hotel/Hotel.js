@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import styles from "./Hotel.module.css";
 import hotelImg from "../../../assets/images/hotel1.jpg";
 import ThemeContext from "../../../context/themeContext";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import useAuth from "../../../hooks/useAuth";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const propTypes = {
   name: PropTypes.string.isRequired,
@@ -13,13 +13,13 @@ const propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-function Hotel(props) {
+function Hotel({ onOpen, name, city, rating, id, description }) {
   const theme = useContext(ThemeContext);
   const [auth] = useAuth();
 
   const clickHandler = (e) => {
     // e.preventDefault();
-    props.onOpen(props);
+    onOpen({ name, city, rating, id, description });
   };
 
   return (
@@ -32,31 +32,29 @@ function Hotel(props) {
           <div className="col-8">
             <div className="row">
               <div className="col">
-                <p className={styles.title}>{props.name}</p>
-                <span>{props.city}</span>
+                <p className={styles.title}>{name}</p>
+                <span>{city}</span>
               </div>
               <div className="col text-right">
-                <h5>Ocena: {props.rating}</h5>
-                <Link to={`/hotel/${props.id}`}>
-                    Pokaż
-                  </Link >
-                {/* <a
+                <h5>Ocena: {rating}</h5>
+                <Link
                   onClick={clickHandler}
-                  href="/hotel/id"
+                  to={`/hotele/${id}`}
                   className={`btn btn-${theme.color} mt-2 px-4`}
                 >
                   Pokaż
-                </a> */}
+                </Link>
               </div>
             </div>
           </div>
 
           <div className="col-12">
-            <p className={styles.description}>{props.description}</p>
+            <p className={styles.description}>{description}</p>
+
             {auth ? (
-              <p className="mt-2">Dostepność: 4 pokoje</p>
+              <p className="mt-2">Dostępność: 4 pokoje</p>
             ) : (
-              <p className="mt-2">Dostepność: po zalogowaniu użytkownika</p>
+              <p className="mt-2">Dostępność: Po zalogowaniu</p>
             )}
           </div>
         </div>
