@@ -21,7 +21,7 @@ export default function Profile(props) {
             <NavLink className="nav-link" to={`${url}/hotele`}>
               Hotel
             </NavLink>
-          </li>{" "}
+          </li>
         </ul>
         <div className="pt-4">
           <Switch>

@@ -1,5 +1,5 @@
-import { useReducer } from "react";
-import { HashRouter as Router, Route, Switch,Redirect } from "react-router-dom";
+import { useReducer, lazy, Suspense } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
@@ -15,9 +15,11 @@ import { reducer, intialState } from "./reducer";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
-import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/404/404";
 import Login from "./pages/Auth/Login";
+import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRoute";
+
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
@@ -31,18 +33,16 @@ function App() {
   );
   const content = (
     <div>
-      <Switch>
-        <Route path="/hotele/:id">
-          <Hotel />
-        </Route>
-        <Route path="/wyszukaj/:term?" component={Search} />
-        <Route path="/profil">
-          {state.isAuthenticated} <Profile/>: <Redirect to="/zaloguj"/>
-        </Route>
-        <Route path="/zaloguj" component={Login} />
-        <Route path="/" exact component={Home} />
-        <Route component={NotFound} />
-      </Switch>
+      <Suspense fallback={<p>Ładowanie .... </p>}>
+        <Switch>
+          <AuthenticatedRoute path="/profil" component={Profile} />
+          <Route path="/hotele/:id" component={Hotel} />
+          <Route path="/wyszukaj/:term?" component={Search} />
+          <Route path="/zaloguj" component={Login} />
+          <Route path="/" exact component={Home} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </div>
   );
   const menu = <Menu />;
@@ -69,12 +69,14 @@ function App() {
               dispatch: dispatch,
             }}
           >
-            <Layout
-              header={header}
-              menu={menu}
-              content={content}
-              footer={footer}
-            />
+            
+              <Layout
+                header={header}
+                menu={menu}
+                content={content}
+                footer={footer}
+              />
+           
           </ReducerContext.Provider>
         </ThemeContext.Provider>
       </AuthContext.Provider>
