@@ -9,39 +9,51 @@ export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(null);
 
   const submit = (e) => {
     e.preventDefault();
     setLoading(true);
 
     setTimeout(() => {
-      setAuth(true);
-      history.push("/");
+      if (true) {
+        setAuth(true);
+        history.push("/");
+      } else {
+        setValid(false);
+        setPassword("")
+      }
+      setLoading(false);
     }, 500);
   };
 
   return (
-    <form onSubmit={submit}>
+    <div>
       <h2>Logowanie</h2>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          className="form-control"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Hasło</label>
-        <input
-          type="password"
-          className="form-control"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <LoadingButton loading={loading} label="Zaloguj" />
-    </form>
+      {valid === false ? (
+        <div className="alert alert-danger">Niepoprawne dane logowania</div>
+      ) : null}
+      <form onSubmit={submit}>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Hasło</label>
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <LoadingButton loading={loading} label="Zaloguj" />
+      </form>
+    </div>
   );
 }

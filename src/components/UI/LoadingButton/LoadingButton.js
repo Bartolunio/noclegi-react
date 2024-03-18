@@ -8,6 +8,6 @@ const className =props.className || "btn-primary"
       </span>
     </button>
   ) : (
-          <button className={`btn ${className}`}>{props.label}</button>
+          <button {...props} className={`btn ${className}`}>{props.label}</button>
   );
 }
